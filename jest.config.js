@@ -4,6 +4,14 @@
 const { jestConfig } = require('lwc-services/lib/config/jestConfig');
 
 module.exports = {
-    ...jestConfig
+    ...jestConfig,
     // Add your custom Jest configuration
+
+    // run jest with lightning base components https://salesforce.stackexchange.com/questions/348971/lwc-oss-lightning-base-components-jest-tests
+    transformIgnorePatterns: ['/node_modules/(?!lightning-base-components)'],
+    moduleNameMapper: {
+        "lightning/(.*)": [
+            "<rootDir>/node_modules/lightning-base-components/src/lightning/$1/$1.js"
+        ]
+    },
 };
